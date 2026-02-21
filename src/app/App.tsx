@@ -140,7 +140,7 @@ export default function App() {
               <div className="flex flex-col gap-2 items-center">
                  <div className="flex items-center gap-2">
                    <MapPin className="w-4 h-4 text-zinc-600" />
-                   Казань, готов к переезду
+                   Россия, Казань
                  </div>
                  <div className="flex items-center gap-2">
                    <Users className="w-4 h-4 text-zinc-600" />
