@@ -9,6 +9,8 @@ import {
   GraduationCap, 
   CheckCircle2, 
   Phone,
+  Send,
+  Settings,
   ArrowRight,
   MapPin,
   FileText,
@@ -16,7 +18,7 @@ import {
   Target,
   BarChart
 } from "lucide-react";
-import profileImg from "figma:asset/f414801deaccbbce699e5f348604026093dd8d3e.png";
+// use image from `public` to preserve original quality
 
 // --- Components ---
 
@@ -77,24 +79,24 @@ const SkillBadge = ({ name }: { name: string }) => (
 );
 
 const StatItem = ({ value, label }: { value: string, label: string }) => (
-  <div className="text-center p-4 bg-zinc-800/50 rounded-2xl border border-zinc-800">
-    <div className="text-2xl md:text-3xl font-bold text-yellow-400 mb-1">{value}</div>
-    <div className="text-[10px] md:text-xs text-zinc-500 uppercase tracking-wider font-semibold">{label}</div>
+  <div className="text-center p-2 bg-zinc-800/50 rounded-2xl border border-zinc-800 min-w-0">
+    <div className="text-lg md:text-xl font-bold text-yellow-400 mb-0.5 truncate leading-tight">{value}</div>
+    <div className="text-[8px] md:text-[9px] text-zinc-500 uppercase tracking-wider font-semibold break-words">{label}</div>
   </div>
 );
 
 const ExperienceItem = ({ role, company, period, details }: { role: string, company: string, period: string, details?: string[] }) => (
-  <div className="relative pl-6 border-l border-zinc-700 pb-8 last:pb-0 group">
+  <div className="relative pl-6 border-l border-zinc-700 pb-6 last:pb-0 group">
     <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-zinc-600 border border-zinc-900 group-hover:bg-yellow-400 transition-colors" />
-    <h4 className="font-bold text-zinc-100 text-sm">{role}</h4>
+    <h4 className="font-bold text-zinc-100 text-base md:text-lg mb-1">{role}</h4>
     <div className="flex justify-between items-baseline mb-2">
-      <p className="text-xs text-yellow-500 font-medium">{company}</p>
-      <span className="text-[10px] text-zinc-500 font-mono">
+      <p className="text-sm md:text-[15px] text-yellow-500 font-medium">{company}</p>
+      <span className="text-xs md:text-sm text-zinc-500 font-mono">
         {period}
       </span>
     </div>
     {details && (
-      <ul className="text-xs text-zinc-400 space-y-1 list-disc list-inside marker:text-zinc-600">
+      <ul className="text-sm md:text-[15px] text-zinc-300 space-y-1 list-disc list-inside marker:text-zinc-600 leading-snug">
         {details.map((item, i) => (
           <li key={i}>{item}</li>
         ))}
@@ -114,14 +116,14 @@ export default function App() {
           {/* Image Background Area */}
           <div className="relative w-full h-[45%] min-h-[220px]">
              <img 
-               src={profileImg} 
+               src="/Screenshot_20251022-162424~7.png" 
                alt="Чураев Евгений" 
                className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 transition-opacity duration-700"
              />
              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/40 to-transparent" />
           </div>
           
-          <div className="relative z-10 flex flex-col p-6 -mt-12 h-[55%]">
+          <div className="relative z-10 flex flex-col p-4 -mt-8">
             <h1 className="text-3xl font-bold text-white mb-1 text-center">
               Чураев Евгений
             </h1>
@@ -132,7 +134,7 @@ export default function App() {
             
             <div className="space-y-4 text-sm text-zinc-400 mb-6 flex-grow text-center">
               <p>
-                Руководитель проектов и аналитик с опытом 6+ лет. 
+                Руководитель проектов с опытом 5+ лет. 
                 Управляю рисками и довожу 100% проектов до финала.
               </p>
               <div className="flex flex-col gap-2 items-center">
@@ -155,11 +157,23 @@ export default function App() {
                 <span className="truncate">makentoshgh@gmail.com</span>
               </a>
               <a href="https://t.me/honky_tonc" className="flex items-center gap-3 text-sm text-zinc-300 hover:text-white transition-colors p-2 hover:bg-zinc-800/50 rounded-lg border border-zinc-800 hover:border-zinc-700">
-                 <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-yellow-500 shrink-0">
-                  <Phone className="w-4 h-4" />
+                <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-yellow-500 shrink-0">
+                  <Send className="w-4 h-4" />
                 </div>
                 <span className="truncate">@honky_tonc</span>
               </a>
+              <a href="tel:+79867136840" className="flex items-center gap-3 text-sm text-zinc-300 hover:text-white transition-colors p-2 hover:bg-zinc-800/50 rounded-lg border border-zinc-800 hover:border-zinc-700">
+                <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-yellow-500 shrink-0">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <span className="truncate">+7 (986) 713-68-40</span>
+              </a>
+              <div className="mt-2 flex items-center justify-center">
+                <a href="/Резюме_Project_Manager_Евгений_Николаевич_Чураев_от_21_02_2026_07.pdf" download className="inline-flex items-center gap-2 px-3 py-2 bg-yellow-500 text-black rounded-lg font-bold text-sm">
+                  Скачать резюме
+                  <Download className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           </div>
         </BentoCard>
@@ -172,69 +186,56 @@ export default function App() {
           <VideoPlayer />
         </BentoCard>
 
-        {/* 3. Stats Card */}
-        <BentoCard className="flex flex-col justify-center gap-4 bg-zinc-900">
-          <StatItem value="6+" label="Лет опыта" />
-          <StatItem value="100%" label="Соблюдение SLA" />
-          <StatItem value="4+" label="Федеральных проекта" />
-        </BentoCard>
-
-        {/* 4. Skills (Grid) */}
-        <BentoCard className="md:col-span-1 lg:col-span-1">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-bold text-white">Компетенции</h3>
-            <Target className="w-4 h-4 text-yellow-500" />
+        {/* 3. Stats + Ключевое (combined) */}
+        <BentoCard className="flex flex-col justify-between gap-4 bg-zinc-900">
+          <div className="grid grid-cols-3 gap-2">
+            <StatItem value="5+" label="Лет опыта" />
+            <StatItem value="100%" label="Соблюдение SLA" />
+            <StatItem value="4+" label="Федеральных проекта" />
           </div>
-          <div className="flex flex-wrap gap-2">
-            <SkillBadge name="Agile" />
-            <SkillBadge name="Scrum" />
-            <SkillBadge name="Kanban" />
-            <SkillBadge name="Jira" />
-            <SkillBadge name="Confluence" />
-            <SkillBadge name="Risk Management" />
-            <SkillBadge name="People Management" />
-            <SkillBadge name="Waterfall" />
-          </div>
-        </BentoCard>
-
-        {/* 5. Education */}
-        <BentoCard className="md:col-span-1 lg:col-span-1">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-bold text-white">Образование</h3>
-            <GraduationCap className="w-5 h-5 text-yellow-500" />
-          </div>
-          <div className="space-y-4">
-            <div className="pb-3 border-b border-zinc-800">
-              <div className="text-sm font-semibold text-zinc-200">Инженерно-технологический</div>
-              <div className="text-xs text-zinc-500 mt-1">Елабужский институт КФУ</div>
-              <div className="text-[10px] text-zinc-600 mt-0.5">Неоконченное высшее • 2019</div>
-            </div>
-             <div>
-              <div className="text-sm font-semibold text-zinc-200">Ключевой навык</div>
-              <div className="text-xs text-zinc-500 mt-1">Стратегическое мышление и аналитика</div>
-            </div>
+          <div className="pt-3 border-t border-zinc-800">
+            <h4 className="font-bold text-white text-sm mb-2">Ключевое</h4>
+            <ul className="space-y-2">
+              <li className="flex items-center gap-3 text-sm font-medium opacity-80 hover:text-white transition-colors">
+                <CheckCircle2 className="w-4 h-4 text-yellow-500 flex-shrink-0" />
+                Бюджетирование
+              </li>
+              <li className="flex items-center gap-3 text-sm font-medium opacity-80 hover:text-white transition-colors">
+                <CheckCircle2 className="w-4 h-4 text-yellow-500 flex-shrink-0" />
+                Оптимизация процессов
+              </li>
+              <li className="flex items-center gap-3 text-sm font-medium opacity-80 hover:text-white transition-colors">
+                <CheckCircle2 className="w-4 h-4 text-yellow-500 flex-shrink-0" />
+                Полный цикл (Pre-sale – Release)
+              </li>
+              <li className="flex items-center gap-3 text-sm font-medium opacity-80 hover:text-white transition-colors">
+                <CheckCircle2 className="w-4 h-4 text-yellow-500 flex-shrink-0" />
+                Деловая коммуникация
+              </li>
+            </ul>
           </div>
         </BentoCard>
 
-        {/* 6. Experience Summary (Scrollable) */}
-        <BentoCard className="md:col-span-1 lg:col-span-1 lg:row-span-2 overflow-hidden flex flex-col">
+        {/* 4/5. Experience (replaces Skills + Education) — span width like video */}
+        <BentoCard className="md:col-span-2 lg:col-span-2 overflow-hidden flex flex-col">
           <div className="flex items-center justify-between mb-6 sticky top-0 bg-zinc-900 z-10 pb-2 border-b border-zinc-800">
             <h3 className="font-bold text-white text-lg">Опыт работы</h3>
             <Briefcase className="w-5 h-5 text-yellow-500" />
           </div>
-          
-          <div className="overflow-y-auto pr-2 custom-scrollbar-dark flex-grow space-y-1">
+
+          <div className="overflow-y-auto pr-2 custom-scrollbar-dark flex-grow space-y-2">
             <ExperienceItem 
               role="Руководитель проекта" 
               company="АО «БАРС груп»" 
               period="2022 — Наст. время"
               details={[
-                "Руководство полным циклом ИТ-проектов.",
-                "Повышение рентабельности через Jira.",
-                "Внедрение сервиса для 1500 пользователей.",
-                "Управление командой до 15 чел.",
-                "Устранение тех. долга."
-              ]}
+                  "Руководство полным циклом ИТ-проектов.",
+                  "Координация стейкхолдеров и ведение отчётности.",
+                  "Повышение рентабельности через Jira.",
+                  "Внедрение сервиса для 1500 пользователей.",
+                  "Управление командой до 15 чел.",
+                  "Устранение тех. долга."
+                ]}
             />
 
             <ExperienceItem 
@@ -260,63 +261,48 @@ export default function App() {
               ]}
             />
           </div>
-          
-          <button className="w-full mt-4 py-3 border border-zinc-700 rounded-xl text-xs font-bold text-zinc-400 hover:text-white hover:bg-zinc-800 transition flex items-center justify-center gap-2 group uppercase tracking-wider">
-            Скачать резюме
-            <Download className="w-3 h-3 group-hover:translate-y-0.5 transition-transform" />
-          </button>
         </BentoCard>
 
-        {/* 7. Key Competencies / Services */}
-        <BentoCard className="md:col-span-1 lg:col-span-1 bg-zinc-900 border-zinc-800 text-zinc-300 relative overflow-hidden group">
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-700" />
-          
-          <h3 className="font-bold text-xl text-white mb-4 relative z-10 border-b border-zinc-800 pb-2">Ключевое</h3>
-          <ul className="space-y-3 relative z-10">
-            <li className="flex items-center gap-3 text-sm font-medium opacity-80 hover:text-white transition-colors">
-              <CheckCircle2 className="w-4 h-4 text-yellow-500 flex-shrink-0" />
-              Бюджетирование
-            </li>
-            <li className="flex items-center gap-3 text-sm font-medium opacity-80 hover:text-white transition-colors">
-              <CheckCircle2 className="w-4 h-4 text-yellow-500 flex-shrink-0" />
-              Оптимизация процессов
-            </li>
-            <li className="flex items-center gap-3 text-sm font-medium opacity-80 hover:text-white transition-colors">
-              <CheckCircle2 className="w-4 h-4 text-yellow-500 flex-shrink-0" />
-              Полный цикл (Pre-sale – Release)
-            </li>
-            <li className="flex items-center gap-3 text-sm font-medium opacity-80 hover:text-white transition-colors">
-              <CheckCircle2 className="w-4 h-4 text-yellow-500 flex-shrink-0" />
-              Деловая коммуникация
-            </li>
-          </ul>
-        </BentoCard>
-
-        {/* 8. Call to Action */}
-        <BentoCard className="md:col-span-3 lg:col-span-2 flex flex-col justify-between group cursor-pointer hover:bg-zinc-800 transition-colors border-zinc-700">
+        {/* 6a. Education + Competencies (combined, compact) */}
+        <BentoCard className="md:col-span-1 lg:col-span-1">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="font-bold text-white">Образование</h3>
+            <GraduationCap className="w-5 h-5 text-yellow-500" />
+          </div>
+          <div className="pb-2 border-b border-zinc-800 mb-3">
+            <div className="text-sm font-semibold text-zinc-200">Инженерно-технологический факультет</div>
+            <div className="text-sm text-zinc-500 mt-1">Елабужский институт КФУ</div>
+            <div className="text-sm text-zinc-500 mt-1">Город: Елабуга</div>
+            <div className="text-sm text-zinc-600 mt-0.5">Неоконченное высшее • 2019</div>
+          </div>
+          <div className="mb-3">
+            <div className="flex items-center justify-between">
+                <div className="text-sm font-semibold text-zinc-200">Ключевой навык</div>
+                <Settings className="w-4 h-4 text-yellow-500" />
+              </div>
+              <div className="text-sm text-zinc-500 mt-1">Стратегическое мышление и аналитика</div>
+          </div>
           <div>
-             <div className="flex items-center justify-between mb-4">
-               <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center group-hover:bg-zinc-700 transition-colors text-yellow-500">
-                  <BarChart className="w-5 h-5" />
-               </div>
-               <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-2 py-1 rounded">Open for opportunities</span>
-             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Готов к новым вызовам</h3>
-            <p className="text-sm text-zinc-400 max-w-md">
-              Ищу позицию Project Manager с возможностью влиять на результат и оптимизировать процессы.
-              Есть разрешение на работу и готовность к командировкам.
-            </p>
-          </div>
-          <div className="mt-6 flex items-center justify-between border-t border-zinc-800 pt-4">
-            <div>
-              <div className="font-bold text-white text-sm">+7 (986) 713-68-40</div>
-              <div className="text-xs text-zinc-500">Telegram, Phone, WhatsApp</div>
+            <div className="flex items-center justify-between mb-2">
+              <h4 className="font-semibold text-zinc-200">Компетенции</h4>
+              <Target className="w-4 h-4 text-yellow-500" />
             </div>
-            <div className="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center text-black font-bold group-hover:scale-110 transition-transform">
-              <ArrowRight className="w-5 h-5" />
+            <div className="flex flex-wrap gap-2">
+              <SkillBadge name="Agile" />
+              <SkillBadge name="Scrum" />
+              <SkillBadge name="Kanban" />
+              <SkillBadge name="Jira" />
+              <SkillBadge name="Confluence" />
+              <SkillBadge name="Risk Management" />
+              <SkillBadge name="People Management" />
+              <SkillBadge name="Waterfall" />
             </div>
           </div>
         </BentoCard>
+
+        
+
+        {/* (Removed duplicate Experience block) */}
 
       </div>
 
